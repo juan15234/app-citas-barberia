@@ -15,6 +15,7 @@ class UserModel():
         cursor.execute(sql,values)
         db.commit()
         results = cursor.fetchone()
+        cursor.close()
         
         if results is None:
             
@@ -24,11 +25,12 @@ class UserModel():
             print(user.nombre + ' ' + user.contraseña + ' ' + user.email + ' ' + user.numero_tel)
 
             try:
-                cursor = db.connection.cursor()
+                cursor = db.cursor()
                 sql = """INSERT INTO usuarios (nombre,contraseña,email,numero_tel) VALUES (%s,%s,%s,%s)"""
                 values = (user.nombre, hashed_password, user.email, user.numero_tel)
                 cursor.execute(sql,values)
                 db.commit()
+                cursor.close()
                 
                 session['nombre']=user.nombre
                 session['email']=user.email
@@ -52,6 +54,7 @@ class UserModel():
             cursor.execute(sql,values)
             db.commit()
             results = cursor.fetchone()
+            cursor.close()
 
             if results is None:
                 
