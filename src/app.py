@@ -4,8 +4,6 @@ import os
 
 from config import config
 
-from models.UserModel import UserModel
-from models.entities.User import User
 
 from models.CitaModel import CitaModel
 from models.entities.Cita import Cita
