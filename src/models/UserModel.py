@@ -9,11 +9,11 @@ class UserModel():
         
         
         #revisar si los datos ya estan en uso
-        cursor = db.connection.cursor()
+        cursor = db.cursor()
         sql = """SELECT * FROM usuarios WHERE nombre=%s OR email=%s OR numero_tel=%s"""
         values=(user.nombre,user.email,user.numero_tel)
         cursor.execute(sql,values)
-        db.connection.commit()
+        db.commit()
         results = cursor.fetchone()
         
         if results is None:
@@ -28,7 +28,7 @@ class UserModel():
                 sql = """INSERT INTO usuarios (nombre,contraseña,email,numero_tel) VALUES (%s,%s,%s,%s)"""
                 values = (user.nombre, hashed_password, user.email, user.numero_tel)
                 cursor.execute(sql,values)
-                db.connection.commit()
+                db.commit()
                 
                 session['nombre']=user.nombre
                 session['email']=user.email
@@ -46,11 +46,11 @@ class UserModel():
         try:
             
             #revisar si el usuario existe
-            cursor = db.connection.cursor()
+            cursor = db.cursor()
             sql = """SELECT * FROM usuarios WHERE nombre=%s"""
             values = (user[0],)
             cursor.execute(sql,values)
-            db.connection.commit()
+            db.commit()
             results = cursor.fetchone()
 
             if results is None:
