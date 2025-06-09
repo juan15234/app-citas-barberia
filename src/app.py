@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for,  render_template, request, session, jsonify
+afrom flask import Flask, redirect, url_for,  render_template, request, session, jsonify
 import mysql.connector
 import os
 
@@ -25,7 +25,7 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('crear_citas.html')
 
 @app.route('/horas_disponibles', methods=['POST', 'GET'])
 def horas_disponibles():
@@ -36,7 +36,7 @@ def horas_disponibles():
     
     citas_disponibles = CitaModel.horas_disponibles(connection, fecha, barbero)
 
-    return citas_disponibles
+    return render_template('crear_citas.html',)
 
 @app.route('/crear_cita')
 def crear_cita():
