@@ -65,8 +65,10 @@
 
               <div class="form-group">
                 <label for="Hora">Hora:</label>
-                <select name="Hora" id="Hora">
-                    <option value="">---Selecciona Fecha y Barbero---</option>
+                <select name="hora">
+                  {% for hora in horas %}
+                    <option value="{{ hora }}">{{ hora }}</option>
+                  {% endfor %}
                 </select>
               </div>
 
@@ -86,44 +88,6 @@
         flatpickr("#fecha", {
             dateFormat: "d/m/Y"
         });
-
-        document.getElementById("fecha").addEventListener("change", obtenerHoras);
-        document.getElementById("barbero").addEventListener("change", obtenerHoras);
-
-        function obtenerHoras() {
-            const fecha = document.getElementById("fecha").value;
-            const barbero_id = document.getElementById("barbero").value;
-
-            if (!fecha || !barbero_id) return;
-
-            fetch("/horas-disponibles", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ fecha, barbero_id })
-            })
-            .then(res => res.json())
-            .then(horas => {
-            const select = document.getElementById("hora");
-            select.innerHTML = "";
-
-            if (horas.length === 0) {
-                const opt = document.createElement("option");
-                opt.text = "No hay horas disponibles";
-                select.add(opt);
-                return;
-            }
-
-            horas.forEach(hora => {
-                const opt = document.createElement("option");
-                opt.value = hora;
-                opt.text = hora;
-                select.add(opt);
-            });
-            });
-        }
-
     </script>
 
 </body>
