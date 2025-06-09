@@ -13,12 +13,14 @@ class CitaModel():
             cursor.execute(sql, values)
             db.commit()
             results = cursor.fetchone()
+            cursor.close()
             
             if results is None:
                 sql="""INSERT INTO citas (nombre_cliente,fecha_hora,servicio,barbero) VALUES (%s,%s,%s,%s)"""
                 values=(cita.nombre_cliente,cita.fecha_hora, cita.servicio, cita.barbero)
                 cursor.execute(sql, values)
                 db.commit()
+                cursor.close()
                 
                 return 'cita creada con exito'
             else:
@@ -37,6 +39,7 @@ class CitaModel():
             cursor.execute(sql, (cita.barbero,))
             db.commit()
             results = cursor.fetchall()
+            cursor.close()
             for row in results:
                 print(row)
             
