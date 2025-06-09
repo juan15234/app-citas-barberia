@@ -1,4 +1,4 @@
-afrom flask import Flask, redirect, url_for,  render_template, request, session, jsonify
+from flask import Flask, redirect, url_for,  render_template, request, session, jsonify
 import mysql.connector
 import os
 
