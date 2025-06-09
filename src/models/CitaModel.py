@@ -7,18 +7,18 @@ class CitaModel():
     def crear_cita(cls,db,cita):
         try:
             
-            cursor = db.connection.cursor()
+            cursor = db.cursor()
             sql="""SELECT * FROM citas WHERE barbero=%s AND fecha_hora=%s"""
             values=(cita.barbero, cita.fecha_hora)
             cursor.execute(sql, values)
-            db.connection.commit()
+            db.commit()
             results = cursor.fetchone()
             
             if results is None:
                 sql="""INSERT INTO citas (nombre_cliente,fecha_hora,servicio,barbero) VALUES (%s,%s,%s,%s)"""
                 values=(cita.nombre_cliente,cita.fecha_hora, cita.servicio, cita.barbero)
                 cursor.execute(sql, values)
-                db.connection.commit()
+                db.commit()
                 
                 return 'cita creada con exito'
             else:
@@ -32,10 +32,10 @@ class CitaModel():
     def view_citas(cls,db,cita):
         try:
             
-            cursor = db.connection.cursor()
+            cursor = db.cursor()
             sql="""SELECT * FROM citas WHERE barbero=%s"""
             cursor.execute(sql, (cita.barbero,))
-            db.connection.commit()
+            db.commit()
             results = cursor.fetchall()
             for row in results:
                 print(row)
