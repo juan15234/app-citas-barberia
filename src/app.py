@@ -36,9 +36,9 @@ def horas_disponibles():
     fecha = data['fecha']
     barbero = data['barbero']
     
-    citas = CitaModel.view_citas(connection,cita)
-    
-    return f'{citas}'
+    citas_disponibles = CitaModel.horas_disponibles(connection, fecha, barbero)
+
+    return citas_disponibles
 
 @app.route('/crear_cita')
 def crear_cita():
