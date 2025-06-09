@@ -27,7 +27,7 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('home.html)
+    return render_template('home.html')
 
 @app.route('/horas_disponibles', methods=['POST', 'GET'])
 def horas_disponibles():
