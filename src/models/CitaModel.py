@@ -11,7 +11,6 @@ class CitaModel():
             sql="""SELECT * FROM citas WHERE barbero=%s AND fecha_hora=%s"""
             values=(cita.barbero, cita.fecha_hora)
             cursor.execute(sql, values)
-            db.commit()
             results = cursor.fetchone()
             cursor.close()
             
@@ -40,10 +39,9 @@ class CitaModel():
             db.commit()
             results = cursor.fetchall()
             cursor.close()
-            for row in results:
-                print(row)
+           
             
-            return 'todas las citas programadas'
+            return results
         
         except Exception as ex:
             traceback.print_exc(ex)
