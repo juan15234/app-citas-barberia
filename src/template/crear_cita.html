@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="crear_cita.html">Agendar Cita</a></li>
+            <li><a href="#">Reseñas</a></li>
+            <li><a href="#">Contactos</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    
+    <form class="form-registro" method="POST" action="/crear_cita">
+
+        <h2>The</h2>
+        <h1>Barber Factory</h1>
+
+
+        <div class="container-inputs">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="nombre">
+              </div>
+            
+              <div class="form-group">
+                <label for="barbero">Barbero:</label>
+                <select id="barbero">
+                  <option>Cualquier Barbero</option>
+                  <option value="Marcos">Marcos</option>
+                </select>
+              </div>
+            
+              <div class="form-group">
+                <label for="servicio">Tipo de Servicio:</label>
+                <select id="servicio">
+                  <option value="Corte Cabello">Corte Cabello</option>
+                  <option value="Corte Barba">Corte Barba</option>
+                  <option value="Corte Cabello y Barba">Corte Cabello y Barba</option>
+                </select>
+              </div>
+            
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="email">
+              </div>
+            
+              <div class="form-group">
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" placeholder="número teléfono">
+              </div>
+            
+              <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha">
+              </div>
+
+              <div class="form-group">
+                <label for="Hora">Hora:</label>
+                <select name="Hora" id="Hora">
+                    <option value="">---Selecciona Fecha y Barbero---</option>
+                </select>
+              </div>
+
+        </div>
+
+        <div class="btn-1">
+            <button type="submit"><span>Registrate</span></button>
+        </div>
+
+    </form>
+
+    <!-- Incluye Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr("#fecha", {
+            dateFormat: "d/m/Y"
+        });
+
+        document.getElementById("fecha").addEventListener("change", obtenerHoras);
+        document.getElementById("barbero").addEventListener("change", obtenerHoras);
+
+        function obtenerHoras() {
+            const fecha = document.getElementById("fecha").value;
+            const barbero_id = document.getElementById("barbero").value;
+
+            if (!fecha || !barbero_id) return;
+
+            fetch("/horas-disponibles", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ fecha, barbero_id })
+            })
+            .then(res => res.json())
+            .then(horas => {
+            const select = document.getElementById("hora");
+            select.innerHTML = "";
+
+            if (horas.length === 0) {
+                const opt = document.createElement("option");
+                opt.text = "No hay horas disponibles";
+                select.add(opt);
+                return;
+            }
+
+            horas.forEach(hora => {
+                const opt = document.createElement("option");
+                opt.value = hora;
+                opt.text = hora;
+                select.add(opt);
+            });
+            });
+        }
+
+    </script>
+
+</body>
+</html>
