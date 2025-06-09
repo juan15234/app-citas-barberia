@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for,  render_template, request, session
+from flask import Flask, redirect, url_for,  render_template, request, session, jsonfy
 import mysql.connector
 import os
 
@@ -29,18 +29,12 @@ def index():
 def home():
     return render_template('home.html)
 
-@app.route('/citas')
-def view_citas():
-    
-    cita = Cita(
-        nombre= request.form['nombre'],
-        email=request.form['email'],
-        numero_tel=request.form['telefono'],
-        tipo_servicio=request.form['servicio'],
-        barbero=request.form['barbero'],
-        fecha=request.form['fecha'],
-        hora=request.form['hora']
-    )
+@app.route('/horas_disponibles', methods=['POST', 'GET'])
+def horas_disponibles():
+
+    data = request.json
+    fecha = data['fecha']
+    barbero = data['barbero']
     
     citas = CitaModel.view_citas(connection,cita)
     
