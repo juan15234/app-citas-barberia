@@ -1,0 +1,195 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    height: 100%;
+    margin: 0;   
+    padding: 0;     
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+
+}
+
+h1{
+    position: relative;
+    color: white;
+    top: 10%;
+}
+
+label{
+    position: relative;
+    left: -12%;
+    top: 5%;
+    z-index: 1;
+    color: rgb(173, 173, 173);
+    transition: top 0.3s ease-in;
+}
+
+.contraseña-label{
+    left: -17%;
+}
+
+.email-label{
+    left: -20%;
+}
+
+.telefono-label{
+    left: -12%;
+}
+
+input{
+    position: relative;
+    width: 50%;
+    height: 5%;
+    top: 10%;
+
+    outline: none;
+    border: none;
+    border-bottom: solid white 1px;
+    color: white;
+    z-index: 2;
+    background-color: transparent;
+    font-size: 17px;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: 1%;
+    color: white;
+}
+
+/* boton inicio sesión */
+
+.btn-1{
+  width: 300px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-1 button{
+  text-decoration: none;
+  border: 2px solid #ffffff;
+  padding: 15px;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-1 button:hover{
+  color: white;
+  cursor: pointer;
+}
+
+span {
+  position: relative;
+  /* z-index coz when we put bg to before and after this span text will not be visible */
+  z-index: 3;
+}
+
+/* Button 1 styles */
+
+.btn-1 button::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  width: calc(100% + 6px);
+  /*100% plus double the times left values*/
+  height: calc(100% - 10px);
+  background-color: #000000;
+  transition: all 0.5s ease-in-out;
+  transform: scaleY(0);
+}
+
+.btn-1 button:hover::before{
+  transform: scaleY(1);
+}
+
+.btn-1 button::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: -5px;
+  width: calc(100% - 10px);
+  /*100% plus double the times left values*/
+  height: calc(100% + 10px);
+  background-color: #000000;
+  transition: all 0.5s ease-in-out;
+  transform: scaleX(0);
+}
+/* Created by http://grohit.com/  */
+
+.btn-1 button:hover::after{
+  transform: scaleX(1);
+}
+
+form a{
+  position: relative;
+  color: white;
+  cursor: pointer;
+}
+
+.vista-registro{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgb(156, 146, 146);
+  font-size: 40px;
+}
+
+.vista h3{
+  position: relative;
+  top: 20%;
+}
+
+.form-registro,
+.form-login {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  width: 30%;
+  height: 700px;
+  top: 100px;
+  border-radius: 5%;
+  background-color: gray;
+  gap: 10px;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1;
+}
+
+.form-login {
+  transform: translate(100%);
+  gap: 40px;
+}
+
+.form-login input{
+  top: 15%;
+}
+
+.move-left {
+  transform: translate(150%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.move-right {
+  transform: translate(0%);
+  opacity: 1;
+  pointer-events: auto;
+}
