@@ -33,12 +33,12 @@ class CitaModel():
             
             cursor = db.cursor()
             sql="""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s"""
-            cursor.execute("""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s"""(barbero,fecha,))
+            cursor.execute("""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s""", (barbero,fecha))
 
             horas_ocupadas = [fila[0].strftim("%H:%M") for fila in cursor.fetchall()]
 
             inicio = datetime.strptime("09:00", "%H:%M")
-            fin = datetime.strftime("20:00", "%H:M")
+            fin = datetime.strptime("20:00", "%H:%M")
             todas = []
 
             while inicio <= fin:
