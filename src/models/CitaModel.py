@@ -1,6 +1,6 @@
 from models.entities.Cita import Cita
 import traceback
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class CitaModel():
     
