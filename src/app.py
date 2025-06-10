@@ -27,7 +27,7 @@ def index():
 def home():
     return render_template('crear_cita.html')
 
-@app.route('/horas_disponibles', methods=['POST', 'GET'])
+@app.route('/horas-disponibles', methods=['POST', 'GET'])
 def horas_disponibles():
 
     if request.method == 'POST':
