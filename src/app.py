@@ -36,7 +36,7 @@ def horas_disponibles():
     
     citas_disponibles = CitaModel.horas_disponibles(connection, fecha, barbero)
 
-    return citas_diponibles
+    return jsonify({"horas":citas_disponibles})
 
 @app.route('/crear_cita')
 def crear_cita():
