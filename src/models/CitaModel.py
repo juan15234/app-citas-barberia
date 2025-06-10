@@ -9,8 +9,8 @@ class CitaModel():
         try:
             
             cursor = db.cursor()
-            sql="""SELECT * FROM citas WHERE barbero=%s AND fecha_hora=%s"""
-            values=(cita.barbero, cita.fecha_hora)
+            sql="""SELECT * FROM citas WHERE barbero=%s AND fecha=%s AND hora=%s"""
+            values=(cita.barbero, cita.fecha, cita.hora)
             cursor.execute(sql, values)
             results = cursor.fetchone()
             
@@ -33,7 +33,7 @@ class CitaModel():
         try:
         
             cursor = db.cursor()
-            sql="""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s"""
+            sql="""SELECT TIME_FORMAT(hora, '%H:%i') FROM citas WHERE barbero=%s AND fecha=%s"""
             cursor.execute("""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s""", (barbero,fecha))
 
             horas_ocupadas = [fila[0].strftime("%H:%M") for fila in cursor.fetchall()]
