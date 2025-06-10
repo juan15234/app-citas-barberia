@@ -31,10 +31,7 @@ class CitaModel():
     @classmethod
     def horas_disponibles(cls,db,fecha, barbero):
         try:
-
-            #cambiar fecha "%d/%m/%Y a %Y-%m-%d
-            fecha = datetime.strptime(fecha, "%d/%m/%Y").strftime("%Y-%m-%d")
-            
+        
             cursor = db.cursor()
             sql="""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s"""
             cursor.execute("""SELECT hora FROM citas WHERE barbero=%s AND fecha=%s""", (barbero,fecha))
