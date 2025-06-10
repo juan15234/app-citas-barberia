@@ -36,7 +36,7 @@ def horas_disponibles():
     
     citas_disponibles = CitaModel.horas_disponibles(connection, fecha, barbero)
 
-    return render_template('crear_cita.html',)
+    return render_template('crear_cita.html',citas_disponibles)
 
 @app.route('/crear_cita')
 def crear_cita():
