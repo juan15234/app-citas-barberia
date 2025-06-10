@@ -30,13 +30,14 @@ def home():
 @app.route('/horas_disponibles', methods=['POST', 'GET'])
 def horas_disponibles():
 
-    data = request.json
-    fecha = data['fecha']
-    barbero = data['barbero']
+    if request.method == 'POST':
+        data = request.json
+        fecha = data['fecha']
+        barbero = data['barbero']
     
-    citas_disponibles = CitaModel.horas_disponibles(connection, fecha, barbero)
+        citas_disponibles = CitaModel.horas_disponibles(connection, fecha, barbero)
 
-    return jsonify({"horas":citas_disponibles})
+        return jsonify({"horas":citas_disponibles})
 
 @app.route('/crear_cita')
 def crear_cita():
