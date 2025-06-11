@@ -6,4 +6,5 @@ class Cita():
         self.nombre_cliente=nombre_cliente
         self.servicio=servicio
         self.barbero=barbero
-        self.fecha_hora=fecha_hora
+        self.fecha=fecha
+        self.hora=hora
