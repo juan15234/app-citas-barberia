@@ -39,17 +39,20 @@ def horas_disponibles():
 @app.route('/crear_cita', methods=['POST','GET'])
 def crear_cita():
     
-    cita = Cita(
+    if request.method == 'POST':
+        cita = Cita(
         nombre_cliente=request.form.get('nombre'),
         servicio=request.form.get('servicio'),
         barbero=request.form.get('barbero'),
         fecha=request.form.get('fecha'),
         hora=request.form.get('hora')
-    )
+        )
     
-    citas =  CitaModel.crear_cita(connection,cita)
+        citas =  CitaModel.crear_cita(connection,cita)
     
-    return render_template('crear_cita.html')
+        return render_template('crear_cita.html')
+    else:
+        return render_template('crear_cita.html')
     
     
 
