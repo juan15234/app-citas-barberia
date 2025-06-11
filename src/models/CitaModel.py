@@ -15,14 +15,14 @@ class CitaModel():
             results = cursor.fetchone()
             
             if results is None:
-                sql="""INSERT INTO citas (nombre_cliente,fecha_hora,servicio,barbero) VALUES (%s,%s,%s,%s)"""
-                values=(cita.nombre_cliente,cita.fecha_hora, cita.servicio, cita.barbero)
+                sql="""INSERT INTO citas (nombre_cliente,fecha,servicio,barbero,hora) VALUES (%s,%s,%s,%s,%s)"""
+                values=(cita.nombre_cliente,cita.fecha_hora, cita.servicio, cita.barbero,cita.hora)
                 cursor.execute(sql, values)
                 db.commit()
                 
                 return 'cita creada con exito'
             else:
-                return 'fecha no disponible, seleccione un dia distinto u otra hora'
+                return 'fecha no disponible, seleccione otro horario'
         
         except Exception as ex:
             traceback.print_exc(ex)
