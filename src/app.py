@@ -27,7 +27,7 @@ def index():
 def home():
     return render_template('crear_cita.html')
 
-@app.route('/horas-disponibles', methods=['GET'])
+@app.route('/horas_disponibles', methods=['GET'])
 def horas_disponibles():
     fecha = request.args.get("fecha")
     barbero = request.args.get("barbero")
