@@ -105,6 +105,7 @@
                     horas.forEach(hora => {
                         const option = document.createElement('option');
                         option.value = hora;
+                        option.textContent = hora;
                         horaSelect.appendChild(option);
                     });
                 }
