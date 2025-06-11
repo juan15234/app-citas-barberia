@@ -36,14 +36,15 @@ def horas_disponibles():
 
     return jsonify(horas)
 
-@app.route('/crear_cita')
+@app.route('/crear_cita', methods=['POST','GET'])
 def crear_cita():
     
     cita = Cita(
-        nombre_cliente='samuel',
-        servicio='corte',
-        barbero='marcos',
-        fecha_hora='2025-06-10T16:30:00'
+        nombre_cliente=request.form('nombre'),
+        servicio=request.form('servicio'),
+        barbero=request.form('barbero'),
+        fecha=request.form('fecha'),
+        hora=request.form('hora')
     )
     
     citas =  CitaModel.crear_cita(connection,cita)
