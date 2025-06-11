@@ -89,8 +89,8 @@
 
         //horas disponibles   
         document.addEventListener("DOMContentLoaded", function() {
-            const fechaInput = document.querySelector("input[name='fecha']");
-            const barberoSelect = document.querySelector("select[name='barbero']");
+            const fechaInput = document.getElementById("fecha");
+            const barberoSelect = document.getElementById("barbero");
             const horaSelect = document.querySelector("select[name='hora']");
 
             async function cargarHorasDisponibles() {
