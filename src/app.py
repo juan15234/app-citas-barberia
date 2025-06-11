@@ -49,7 +49,7 @@ def crear_cita():
     
     citas =  CitaModel.crear_cita(connection,cita)
     
-    return f'{citas}'
+    return render_template('crear_cita.html', mensaje=cita)
     
     
 
