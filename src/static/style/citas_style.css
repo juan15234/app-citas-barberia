@@ -61,6 +61,7 @@ form h1{
 label {
     margin-bottom: 5px;
     font-weight: bold;
+    font-size: 20px;
 }
 
 input, select {
