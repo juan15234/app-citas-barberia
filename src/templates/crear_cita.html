@@ -98,7 +98,7 @@
                 const barbero = barberoSelect.value;
 
                 if (fecha && barbero) {
-                    const response = await fetch(`/horas_disponibles?fecha=${fecha}&barbero=${barbero]`);
+                    const response = await fetch(`/horas_disponibles?fecha=${fecha}&barbero=${barbero}`);
                     const horas = await response.json();
 
                     horaSelect.innerHTML = '<option>---Seleccione Hora----</option>';
