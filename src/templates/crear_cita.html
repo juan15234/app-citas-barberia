@@ -101,7 +101,7 @@
                     const response = await fetch(`/horas_disponibles?fecha=${fecha}&barbero=${barbero]`);
                     const horas = await response.json();
 
-                    horaSelect.innetHTML = '<option>---Seleccione Hora----</option>';
+                    horaSelect.innerHTML = '<option>---Seleccione Hora----</option>';
                     horas.forEach(hora => {
                         const option = document.createElement('option');
                         option.value = hora;
