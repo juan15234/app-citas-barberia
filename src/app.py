@@ -40,11 +40,11 @@ def horas_disponibles():
 def crear_cita():
     
     cita = Cita(
-        nombre_cliente=request.form('nombre'),
-        servicio=request.form('servicio'),
-        barbero=request.form('barbero'),
-        fecha=request.form('fecha'),
-        hora=request.form('hora')
+        nombre_cliente=request.form.get('nombre'),
+        servicio=request.form.get('servicio'),
+        barbero=request.form.get('barbero'),
+        fecha=request.form.get('fecha'),
+        hora=request.form.get('hora')
     )
     
     citas =  CitaModel.crear_cita(connection,cita)
