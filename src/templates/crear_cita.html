@@ -87,35 +87,32 @@
             dateFormat: "Y-m-d"
         });
 
-        //horas disponibles
-        document.getElementById("fecha").addEventListener("change", cargarHoras);
-  document.getElementById("barbero").addEventListener("change", cargarHoras);
+        //horas disponibles   
+        document.addEventListener("DOMContentLoaded", function() {
+            const fechaInput = document.querySelector("input[name='fecha']");
+            const barberoSelect = document.querySelector("select[name='barbero']");
+            const horaSelect = document.querySelector("select[name='hora']");
 
-  function cargarHoras() {
-    const fecha = document.getElementById("fecha").value;
-    const barbero = document.getElementById("barbero").value;
+            async function cargarHorasDisponibles() {
+                const fecha = fechaInput.value;
+                const barbero = barberoSelect.value;
 
-    if (fecha && barbero) {
-      fetch("/horas-disponibles", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ fecha: fecha, barbero: barbero })
-      })
-      .then(res => res.json())
-      .then(data => {
-        const selectHoras = document.getElementById("horas");
-        selectHoras.innerHTML = "";
-        data.horas.forEach(hora => {
-          const option = document.createElement("option");
-          option.value = hora;
-          option.text = hora;
-          selectHoras.appendChild(option);
+                if (fecha && barbero) {
+                    const response = await fetch('/horas-disponibles?fecha=${fecha}&barbero=${barbero]');
+                    const horas = await response.json();
+
+                    horaSelect.innetHTML = '<option>---Seleccione Hora----</option>';
+                    horas.forEach(hora => {
+                        const option = document.createElement('option');
+                        option.value = hora;
+                        horaSelect.appendChild(option);
+                    });
+                }
+            }
+
+            fechaInput.addEventListener("change", cargarHorasDisponibles);
+            barberoSelect.addEventListener("change", cargarHorasDisponibles);
         });
-      });
-    }
-  }
     </script>
 
 </body>
