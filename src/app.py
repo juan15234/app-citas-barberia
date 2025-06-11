@@ -25,7 +25,7 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('crear_cita.html')
+    return render_template('home.html')
 
 @app.route('/horas_disponibles', methods=['GET'])
 def horas_disponibles():
@@ -49,7 +49,7 @@ def crear_cita():
     
     citas =  CitaModel.crear_cita(connection,cita)
     
-    return render_template('crear_cita.html', mensaje=cita)
+    return render_template('crear_cita.html')
     
     
 
