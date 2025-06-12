@@ -3,9 +3,23 @@ body, html{
     display: flex;
     justify-content: center;
 
-    height: 900px;
+    overflow-y: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+
+    height: 100%;
     margin: 0;
     background: linear-gradient(white, black);
+}
+
+.vista{
+    position: relative;
+    height: 100%;
+    width: 40%;
+}
+
+#imagen{
+    height: 100%;
+    width: 98%;
 }
 
 form{
@@ -13,18 +27,9 @@ form{
     display: flex;
     align-items: center;
     flex-direction: column;
-    top: 30px;
+    top: 50px;
     width: 60%;
     height: 600px;
-}
-
-form h2{
-    font-size: 25px;
-}
-
-form h1{
-    font-size: 50px;
-    margin: 0;
 }
 
 .container-inputs{
@@ -39,7 +44,7 @@ form h1{
 
 .container-inputs input{
     width: 320px;
-    height: 40px;
+    height: 25px;
     border: none;
     font-size: 20px;
     outline: none;
@@ -47,7 +52,7 @@ form h1{
 
 .container-inputs select{
     outline: none;
-    width: 326px;
+    width: 335px;
     font-size: 20px;
     border: none;
 }
@@ -60,8 +65,7 @@ form h1{
 
 label {
     margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 input, select {
@@ -79,13 +83,14 @@ nav ul{
     top: -20px;
     width: 97%;
     height: 7vh;
-    background-color: rgb(102, 96, 96);
+    background-color: rgb(255, 249, 249);
     font-size: 20px;
     list-style: none;
+    z-index: 2;
 }
 
 a{
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     position: relative;
     font-size: 20px;
@@ -99,7 +104,7 @@ a::after {
     bottom: -5px; /* Ubica la lÃƒÂ­nea debajo */
     width: 0; /* Inicialmente oculta */
     height: 3px;
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     border-radius: 50px;
     transition: width 0.3s ease-in-out;
 }
@@ -112,7 +117,7 @@ a:hover::after{
 
 .btn-1{
     position: relative;
-    top: 17%;
+    top: 5%;
     width: 300px;
     height: 200px;
     display: flex;
