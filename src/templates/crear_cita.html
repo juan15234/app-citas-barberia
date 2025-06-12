@@ -4,49 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/style/citas_style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <header>
     <nav>
         <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/crear_cita">Agendar Cita</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="crear_cita.html">Agendar Cita</a></li>
             <li><a href="#">Reseñas</a></li>
             <li><a href="#">Contactos</a></li>
         </ul>
     </nav>
 </header>
 <body>
+
+    <div class="vista">
+        <img src="vista_image.jpg" alt="imagen" id="imagen">
+    </div>
     
     <form class="form-registro" method="POST" action="/crear_cita">
-
-        <h2>The</h2>
-        <h1>Barber Factory</h1>
 
 
         <div class="container-inputs">
             
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                <input type="text" id="nombre" placeholder="Nombre">
               </div>
             
               <div class="form-group">
                 <label for="barbero">Barbero:</label>
-                <select id="barbero" name="barbero">
-                    <option>---Seleccione un Barbero---</option>
-                    <option value="Marcos">Marcos</option>
-                    <option value="Ruben">Ruben</option>
-                    <option value="Bryan">Bryan</option>
-                    <option value="William">William</option>
-                    <option value="Jhon">Jhon</option>
+                <select id="barbero">
+                  <option>Cualquier Barbero</option>
+                  <option value="Marcos">Marcos</option>
                 </select>
               </div>
             
               <div class="form-group">
                 <label for="servicio">Tipo de Servicio:</label>
-                <select id="servicio" name="servicio">
-                    <option>---Seleccione un Servicio---</option>
+                <select id="servicio">
                   <option value="Corte Cabello">Corte Cabello</option>
                   <option value="Corte Barba">Corte Barba</option>
                   <option value="Corte Cabello y Barba">Corte Cabello y Barba</option>
@@ -54,25 +50,30 @@
               </div>
             
               <div class="form-group">
-                <label for="email" name="email">Email:</label>
-                <input type="email" id="email" placeholder="email">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Email">
               </div>
             
               <div class="form-group">
-                <label for="telefono" name="telefono">Número de Teléfono:</label>
-                <input type="tel" id="telefono" placeholder="número teléfono">
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" placeholder="Número teléfono">
               </div>
             
               <div class="form-group">
                 <label for="fecha">Fecha:</label>
-                <input type="date" placeholder="---Seleccione una Fecha---" id="fecha" name="fecha">
+                <input type="date" id="fecha" placeholder="---Seleccione una Fecha---">
               </div>
 
               <div class="form-group">
                 <label for="Hora">Hora:</label>
-                <select name="hora">
-                    <option>---Seleccione Fecha y Barbero---</option>
+                <select name="Hora" id="Hora">
+                    <option value="">---Selecciona Fecha y Barbero---</option>
                 </select>
+              </div>
+
+              <div class="form-group">
+                <label for="Nota">Nota(opcional):</label>
+                <input type="text" name="nota" placeholder="Nota(opcional)">
               </div>
 
         </div>
@@ -89,36 +90,46 @@
 
     <script>
         flatpickr("#fecha", {
-            dateFormat: "Y-m-d"
+            dateFormat: "d/m/Y"
         });
 
-        //horas disponibles   
-        document.addEventListener("DOMContentLoaded", function() {
-            const fechaInput = document.getElementById("fecha");
-            const barberoSelect = document.getElementById("barbero");
-            const horaSelect = document.querySelector("select[name='hora']");
+        document.getElementById("fecha").addEventListener("change", obtenerHoras);
+        document.getElementById("barbero").addEventListener("change", obtenerHoras);
 
-            async function cargarHorasDisponibles() {
-                const fecha = fechaInput.value;
-                const barbero = barberoSelect.value;
+        function obtenerHoras() {
+            const fecha = document.getElementById("fecha").value;
+            const barbero_id = document.getElementById("barbero").value;
 
-                if (fecha && barbero) {
-                    const response = await fetch(`/horas_disponibles?fecha=${fecha}&barbero=${barbero}`);
-                    const horas = await response.json();
+            if (!fecha || !barbero_id) return;
 
-                    horaSelect.innerHTML = '<option>---Seleccione Hora----</option>';
-                    horas.forEach(hora => {
-                        const option = document.createElement('option');
-                        option.value = hora;
-                        option.textContent = hora;
-                        horaSelect.appendChild(option);
-                    });
-                }
+            fetch("/horas-disponibles", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ fecha, barbero_id })
+            })
+            .then(res => res.json())
+            .then(horas => {
+            const select = document.getElementById("hora");
+            select.innerHTML = "";
+
+            if (horas.length === 0) {
+                const opt = document.createElement("option");
+                opt.text = "No hay horas disponibles";
+                select.add(opt);
+                return;
             }
 
-            fechaInput.addEventListener("change", cargarHorasDisponibles);
-            barberoSelect.addEventListener("change", cargarHorasDisponibles);
-        });
+            horas.forEach(hora => {
+                const opt = document.createElement("option");
+                opt.value = hora;
+                opt.text = hora;
+                select.add(opt);
+            });
+            });
+        }
+
     </script>
 
 </body>
