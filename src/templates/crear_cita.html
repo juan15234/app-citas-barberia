@@ -93,43 +93,32 @@
             dateFormat: "d/m/Y"
         });
 
-        document.getElementById("fecha").addEventListener("change", obtenerHoras);
-        document.getElementById("barbero").addEventListener("change", obtenerHoras);
+        document.addEventListener("DOMContentLoaded", function() {
+    const fechaInput = document.getElementById("fecha");
+    const barberoSelect = document.getElementById("barbero");
+    const horaSelect = document.querySelector("select[name='hora']");
 
-        function obtenerHoras() {
-            const fecha = document.getElementById("fecha").value;
-            const barbero_id = document.getElementById("barbero").value;
+    async function cargarHorasDisponibles() {
+        const fecha = fechaInput.value;
+        const barbero = barberoSelect.value;
 
-            if (!fecha || !barbero_id) return;
+        if (fecha && barbero) {
+            const response = await fetch(`/horas_disponibles?fecha=${fecha}&barbero=${barbero}`);
+            const horas = await response.json();
 
-            fetch("/horas-disponibles", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ fecha, barbero_id })
-            })
-            .then(res => res.json())
-            .then(horas => {
-            const select = document.getElementById("hora");
-            select.innerHTML = "";
-
-            if (horas.length === 0) {
-                const opt = document.createElement("option");
-                opt.text = "No hay horas disponibles";
-                select.add(opt);
-                return;
-            }
-
+            horaSelect.innerHTML = '<option>---Seleccione Hora---</option>';
             horas.forEach(hora => {
-                const opt = document.createElement("option");
-                opt.value = hora;
-                opt.text = hora;
-                select.add(opt);
-            });
+                const option = document.createElement('option');
+                option.value = hora;
+                option.textContent = hora;
+                horaSelect.appendChild(option);
             });
         }
+    }
 
+    fechaInput.addEventListener("change", cargarHorasDisponibles);
+    barberoSelect.addEventListener("change", cargarHorasDisponibles);
+});
     </script>
 
 </body>
