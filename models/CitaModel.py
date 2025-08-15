@@ -23,15 +23,13 @@ class CitaModel:
             
             for fecha_hora, duracion in citas:
                 
-                fecha = fecha_hora.strftime('%Y-%m-%d')
-                hora = fecha_hora + timedelta(hours=5)
+                hora = datetime.strftime(fecha_hora, "%H:%M")
+                
+                hora_inicio = datetime.strptime(hora, "%H:%M")
                 
                 for i in range(duracion):
-                    
-                    bloque = (hora + timedelta(minutes=i)).strftime("%H:%M")
+                    bloque = (hora_inicio + timedelta(minutes=i)).strftime("%H:%M")
                     minutos_ocupados.append(bloque)
-                    
-            print(minutos_ocupados)
                     
                     
             inicio_mañana = datetime.strptime("10:00", "%H:%M")
