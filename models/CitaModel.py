@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from backports.zoneinfo import ZoneInfo
 
 from conexion import obtener_conexion
 
@@ -123,7 +124,7 @@ class CitaModel:
             
             fecha_hora = datetime.strptime(fecha_hora_obj, '%Y-%m-%d %H:%M')
         
-            if fecha_hora >= datetime.now():
+            if fecha_hora >= datetime.now(ZoneInfo("America/Bogota")):
                 conexion = obtener_conexion()
                 cursor = conexion.cursor()
                 sql="""INSERT INTO citas(usuario, barbero, fecha_hora, correo_cliente, telefono_cliente, servicio_numero, duracion, token, nota_cliente) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
