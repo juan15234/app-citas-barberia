@@ -1,0 +1,12 @@
+google==3.0.0
+google-api-core==2.25.1
+google-api-python-client==2.174.0
+google-auth==2.40.3
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.2
+googleapis-common-protos==1.70.0
+dotenv==0.9.9
+flask==3.0.3
+PyMySQL==1.1.1
+yagmail==0.15.293
+APScheduler==3.11.0
