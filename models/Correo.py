@@ -1,6 +1,7 @@
 import yagmail
 import os
 import datetime
+from backports.zoneinfo import ZoneInfo
 
 from conexion import obtener_conexion
 
@@ -99,7 +100,7 @@ class Correo:
     @classmethod
     def enviar_recordatorio(cls):
         
-        hoy = (datetime.date.today().isoformat())
+        hoy = datetime.now(ZoneInfo("America/Bogota")).date().isoformat()
         
         fecha_inicio = datetime.strptime(hoy, "%Y-%m-%d")
         fecha_fin = fecha_inicio.replace(hour=23, minute=59, second=59)
