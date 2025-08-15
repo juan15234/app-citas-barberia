@@ -348,6 +348,7 @@ input{
         height: auto;
         justify-content: center;
         justify-self: center;
+        overflow-x: hidden;
     }
 
     .container{
