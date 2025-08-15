@@ -9,8 +9,4 @@ def obtener_conexion():
         database = os.getenv('DATABASE'),
         port = int(os.getenv('PORT')),
     )
-    
-    with conexion.cursor() as cursor:
-        cursor.execute("SET time_zone = 'America/Bogota'")
-    
     return conexion
