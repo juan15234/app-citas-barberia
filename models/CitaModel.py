@@ -15,24 +15,23 @@ class CitaModel:
             fecha_inicio = datetime.strptime(fecha, "%Y-%m-%d")
             fecha_fin = fecha_inicio.replace(hour=23, minute=59, second=59)
             
-            cursor.execute("""SELECT DATE_FORMAT(fecha_hora, '%%H:%%i'), duracion FROM citas WHERE barbero = %s AND fecha_hora BETWEEN %s AND %s""", (barbero, fecha_inicio, fecha_fin))
+            cursor.execute("""SELECT fecha_hora, duracion FROM citas WHERE barbero = %s AND fecha_hora BETWEEN %s AND %s""", (barbero, fecha_inicio, fecha_fin))
 
             citas = cursor.fetchall()
             
             minutos_ocupados = []
             
-            
             for fecha_hora, duracion in citas:
                 
                 fecha = fecha_hora.strftime('%Y-%m-%d')
-                hora = fecha_hora.strftime('%H:%M') + timedelta(hours=5)
-                
-                hora_inicio = datetime.strptime(hora, "%H:%M")
+                hora = fecha_hora + timedelta(hours=5)
                 
                 for i in range(duracion):
                     
-                    bloque = (hora_inicio + timedelta(minutes=i)).strftime("%H:%M")
+                    bloque = (hora + timedelta(minutes=i)).strftime("%H:%M")
                     minutos_ocupados.append(bloque)
+                    
+            print(minutos_ocupados)
                     
                     
             inicio_mañana = datetime.strptime("10:00", "%H:%M")
