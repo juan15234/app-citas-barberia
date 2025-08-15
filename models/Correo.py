@@ -1,10 +1,8 @@
 import yagmail
 import os
 import datetime
-from backports.zoneinfo import ZoneInfo
 
 from conexion import obtener_conexion
-from models.CitaModel import CitaModel
 
 class Correo:
     
@@ -103,7 +101,7 @@ class Correo:
         
         hoy = (datetime.date.today().isoformat())
         
-        fecha_inicio = datetime.strptime(hoy, "%Y-%m-%d").replace(tzinfo=ZoneInfo("America/Bogota"))
+        fecha_inicio = datetime.strptime(hoy, "%Y-%m-%d")
         fecha_fin = fecha_inicio.replace(hour=23, minute=59, second=59)
         
         conexion = obtener_conexion()
