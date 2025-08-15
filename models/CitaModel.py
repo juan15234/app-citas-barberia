@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from backports.zoneinfo import ZoneInfo
 
 from conexion import obtener_conexion
 
@@ -13,7 +12,7 @@ class CitaModel:
             conexion = obtener_conexion()
             cursor = conexion.cursor()
             
-            fecha_inicio = datetime.strptime(fecha, "%Y-%m-%d").replace(tzinfo=ZoneInfo("America/Bogota"))
+            fecha_inicio = datetime.strptime(fecha, "%Y-%m-%d")
             fecha_fin = fecha_inicio.replace(hour=23, minute=59, second=59)
             
             cursor.execute("""SELECT DATE_FORMAT(fecha_hora, '%%H:%%i'), duracion FROM citas WHERE barbero = %s AND fecha_hora BETWEEN %s AND %s""", (barbero, fecha_inicio, fecha_fin))
@@ -125,9 +124,9 @@ class CitaModel:
             
             fecha_hora_obj = f'{fecha} {hora}'
             
-            fecha_hora = datetime.strptime(fecha_hora_obj, '%Y-%m-%d %H:%M').replace(tzinfo=ZoneInfo("America/Bogota"))
+            fecha_hora = datetime.strptime(fecha_hora_obj, '%Y-%m-%d %H:%M')
         
-            if fecha_hora >= datetime.now(ZoneInfo("America/Bogota")):
+            if fecha_hora >= datetime.now():
                 conexion = obtener_conexion()
                 cursor = conexion.cursor()
                 sql="""INSERT INTO citas(usuario, barbero, fecha_hora, correo_cliente, telefono_cliente, servicio_numero, duracion, token, nota_cliente) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
@@ -155,11 +154,11 @@ class CitaModel:
             
             fecha_hora_obj = f'{nueva_fecha} {nueva_hora}'
             
-            fecha_obj = datetime.strptime(fecha_hora_obj, '%Y-%m-%d %H:%M').replace(tzinfo=ZoneInfo("America/Bogota"))
+            fecha_obj = datetime.strptime(fecha_hora_obj, '%Y-%m-%d %H:%M')
             
             if resultado :
                 
-                if fecha_obj >= datetime.now(ZoneInfo("America/Bogota")):
+                if fecha_obj >= datetime.now():
                     cursor.execute("UPDATE citas SET fecha_hora=%s, barbero=%s WHERE token=%s", (fecha_obj, nuevo_barbero, token,))
                     conexion.commit()
 
