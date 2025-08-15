@@ -123,7 +123,7 @@ class GoogleCalendar:
                 if resultado:
                     print('evento ya existente en bd')
                 else:
-                    sql="""INSERT INTO citas(usuario, barbero, fecha_hora, hora, correo_cliente, telefono_cliente, servicio_numero, duracion, token, nota_cliente) VALUES (%s,%s,%s,%s,%s,%s,%s, %s, %s)"""
+                    sql="""INSERT INTO citas(usuario, barbero, fecha_hora, correo_cliente, telefono_cliente, servicio_numero, duracion, token, nota_cliente) VALUES (%s,%s,%s,%s,%s,%s,%s, %s, %s)"""
                     values = (usuario, barbero, fecha_hora, email, str(telefono), servicio, duracion,  token, nota_cliente)
                     conexion = obtener_conexion()
                     cursor = conexion.cursor()
