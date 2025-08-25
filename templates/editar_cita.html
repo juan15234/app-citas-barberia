@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Barber Factory</title>
+    <link rel="stylesheet" href="../static/style/style_editar.css">
+</head>
+<header>
+    <div class="container-salir">
+        <h2>The Barber Factory</h2>
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+<body>
+    
+    <!--Action=hora_disponible es la ruta donde se va a buscar las horas disponibles para un servicio-->
+    <form id="fecha-barbero-form">
+
+        <div class="container-datos">
+        
+                <div class="container" id="container-barberos-fecha">
+        
+                    <div class="card">
+        
+                    <h2>Seleccione una Fecha</h2>
+        
+                    <div class="fecha">
+        
+                        <input type="date" name="fecha" id="fecha" placeholder="fecha📅" >
+        
+                    </div>
+        
+                </div>
+    
+
+        
+                <div class="card" id="barberos">
+        
+                    <h2>Seleccione El Barbero</h2>
+        
+                    <div class="profesionales">
+        
+                        <button class="profesional" value="william"  type="button">
+        
+                            <img src="../static/imagenes/perfil_william.jpg" id="perfil_william" alt="perfil william">
+        
+                            <label for="perfil_william">William</label>
+        
+                        </button>
+        
+                        <button class="profesional" value="ruben" type="button">
+        
+                            <img src="../static/imagenes/perfil_ruben.jpg" alt="perfil william">
+        
+                            <label for="perfil_ruben">William</label>
+        
+                        </button>
+        
+                        <button class="profesional" value="bryan" type="button">
+        
+                            <img src="../static/imagenes/perfil_bryan.jpg" alt="perfil william">
+        
+                            <label for="perfil_bryan">William</label>
+        
+                        </button>
+        
+                        <button class="profesional" value="marcos" type="button">
+        
+                            <img src="../static/imagenes/perfil_william.jpg" alt="perfil william">
+        
+                            <label for="perfil_marcos">William</label>
+        
+                        </button>
+        
+                        <button class="profesional" value="jhon" type="button">
+        
+                            <img src="../static/imagenes/perfil_jhon.jpg" alt="perfil jhon">
+        
+                            <label for="perfil_jhon">Jhon</label>
+        
+                        </button>
+        
+                    </div>
+        
+                </div>
+        
+            </div>
+
+
+        
+            <div class="card" id="card_horas">
+        
+                <h2>Selecciona la Hora del Servicio</h2>
+        
+                <div id="horas-container" class="horas-disponibles-container">
+
+                    <label>Mañana</label>
+                    <div id="horas_mañana" class="horas-disponibles-horarios-container">
+        
+
+        
+                    </div>
+                    
+                    <label>Tarde</label>
+                    <div id="horas_tarde" class="horas-disponibles-horarios-container">
+        
+
+        
+                    </div>
+        
+                    <label>Noche</label>
+                    <div id="horas_noche" class="horas-disponibles-horarios-container">
+        
+
+        
+                    </div>
+        
+                </div>
+        
+            </div>
+        </div>
+
+        <div class="container-boton-submit">
+
+            <button type="button" class="button-editar" onclick="editar_cita()">
+                <span>Editar</span>
+            </button>
+
+            <button type="button" class="button-cancelar" onclick="cancelar_cita()">
+                <span>Cancelar</span>
+            </button>
+        </div>
+
+    </form>
+
+    <div class="server_response">
+
+        <button onclick="cerrar_alerta()" class="salir_button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16" id="salir_icon" >
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </button>
+
+        <div class="exito">
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="white" class="bi bi-check2" viewBox="0 0 16 16" id="exito_icon">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+            </svg>
+            <span id="span_exito">¡Cita editada con exito!</span>
+        </div>
+
+        <div class="error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16" id="error_icon" >
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+            <span id="span_error">¡Hubo un error, revise los datos!</span>
+        </div>
+    </div>
+
+    <!-- Incluye Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr("input[type='date']", {
+            dateFormat: "Y-m-d"
+        });
+
+        let ultimo_barbero_presionado = null
+
+        //estilo borde boton barbero seleccionado
+        document.querySelectorAll(".profesional").forEach(boton => {
+            boton.addEventListener("click",function(){
+                document.querySelectorAll(".profesional").forEach(btn => {
+                    btn.classList.remove("seleccionado");
+                });
+
+                this.classList.add("seleccionado");
+
+                ultimo_barbero_presionado = this;
+
+                horas_disponibles(this);
+            });
+        });
+
+        //horas disponibles
+        const fechaInput = document.getElementById("fecha");
+        const hora_container = document.getElementById("horas-container");
+
+        const hora_container_mañana = document.getElementById("horas_mañana");
+        const hora_container_tarde = document.getElementById("horas_tarde");
+        const hora_container_noche = document.getElementById("horas_noche");
+
+        let fecha = fechaInput.value;
+        let barbero = null;
+    
+            async function horas_disponibles(boton){
+
+                fecha = fechaInput.value;
+
+                barbero = boton.value;
+
+                if(fecha && barbero){
+                    try{
+                        const response_mañana = await fetch(`/horas-disponibles-mañana?fecha=${fecha}&barbero=${barbero}`);
+
+                    const horas_mañana = await response_mañana.json();
+
+                    hora_container_mañana.innerHTML = "";
+
+                    horas_mañana.forEach(hora => {
+                        const hora_div_mañana = document.createElement('button');
+                        hora_div_mañana.classList.add('horas');
+                        hora_div_mañana.textContent = hora;
+                        hora_div_mañana.value = hora;
+                        hora_div_mañana.type = 'button';
+                        hora_div_mañana.id = `hora-${hora.replace(":", "-")}`;
+                        hora_div_mañana.onclick = function(){
+                            guardar_hora(this.id);
+                        };
+
+                        hora_container_mañana.appendChild(hora_div_mañana);
+
+                    });
+
+                    const response_tarde = await fetch(`/horas-disponibles-tarde?fecha=${fecha}&barbero=${barbero}`);
+
+                    const horas_tarde = await response_tarde.json();
+
+                    hora_container_tarde.innerHTML = "";
+
+                    horas_tarde.forEach(hora => {
+                        const hora_div_tarde = document.createElement('button');
+                        hora_div_tarde.classList.add('horas');
+                        hora_div_tarde.textContent = hora;
+                        hora_div_tarde.value = hora;
+                        hora_div_tarde.type = 'button';
+                        hora_div_tarde.id = `hora-${hora.replace(":", "-")}`;
+                        hora_div_tarde.onclick = function(){
+                            guardar_hora(this.id);
+                        };
+
+                        hora_container_tarde.appendChild(hora_div_tarde);
+
+                    });
+
+                    const response_noche = await fetch(`/horas-disponibles-noche?fecha=${fecha}&barbero=${barbero}`);
+
+                    const horas_noche = await response_noche.json();
+
+
+                    hora_container_noche.innerHTML = "";
+
+                    horas_noche.forEach(hora => {
+                        const hora_div_noche = document.createElement('button');
+                        hora_div_noche.classList.add('horas');
+                        hora_div_noche.textContent = hora;
+                        hora_div_noche.value = hora;
+                        hora_div_noche.type = 'button';
+                        hora_div_noche.id = `hora-${hora.replace(":", "-")}`;
+                        hora_div_noche.onclick = function(){
+                            guardar_hora(this.id);
+                        };
+
+                        hora_container_noche.appendChild(hora_div_noche);
+
+                    });
+                    }catch (error){
+                        console.log(error);
+                    }
+                }
+
+            }
+
+            fechaInput.addEventListener("change",() => {
+                if (ultimo_barbero_presionado){
+                    horas_disponibles(ultimo_barbero_presionado);
+                }
+            });
+
+            let hora = null;
+
+            function guardar_hora(id){
+
+                document.querySelectorAll(".horas").forEach(btn =>{
+                    btn.style.border = "none";
+                });
+
+                hora_element = document.getElementById(id);
+                hora_element.style.border = "1px solid black";
+
+                hora = document.getElementById(id).value;
+                console.log(hora);
+            }
+
+            async function editar_cita(){
+                try{
+
+                    const exito_div = document.querySelector(".exito");
+                    const error_div = document.querySelector(".error");
+                    const salir_button = document.querySelector(".server_response .salir_button");
+
+                    const span_error = document.getElementById("span_error");
+                    const span_exito = document.getElementById("span_exito")
+                    
+
+                    if(barbero && fecha && hora ){
+
+                        const response = await fetch(`/editar_cita_backend?nuevo_barbero=${barbero}&nueva_fecha=${fecha}&nueva_hora=${hora}`);
+
+                        const cita_editada = await response.json();
+
+                        if (cita_editada.ok){
+
+                            exito_div.style.display = "flex";
+                            salir_button.style.display = "block";
+            
+                            span_exito.textContent = cita_editada.estatus_bd;
+
+                            console.log(response.json());
+
+                            window.location.replace("/home")
+                        }
+                        else{
+
+                            span_error.textContent = cita_editada.estatus_google_calendar;
+                            error_div.style.display = "flex";
+                            salir_button.style.display = "block";
+
+                        }
+                    }else{
+                        salir_button.style.display = "block";
+                        error_div.style.display = "flex";
+                    }
+
+                }catch(error){
+                    console.log(error);
+                }
+            }
+
+            async function cancelar_cita(){
+                try{
+
+                    const exito_div = document.querySelector(".exito");
+                    const error_div = document.querySelector(".error");
+                    const salir_button = document.querySelector(".server_response .salir_button");
+
+                    const span_error = document.getElementById("span_error");
+                    const span_exito = document.getElementById("span_exito")
+
+                    const response = await fetch(`/cancelar_cita_backend`);
+                    const cita_cancelada = await response.json();
+
+                    if (cita_cancelada.ok){
+                        exito_div.style.display = "flex";
+                        salir_button.style.display = "block";
+
+                        span_exito.textContent = cita_cancelada.estatus_bd;
+        
+                        console.log(response.json());
+                        window.location.replace("/home")
+                    }
+                    else{
+                        span_error.textContent = cita_cancelada.estatus_google_calendar;
+                        error_div.style.display = "flex";
+                        salir_button.style.display = "block";
+                    }
+
+                }catch(error){
+                    console.log(error);
+                }
+            }
+
+            function cerrar_alerta(){
+
+                const exito_div = document.querySelector(".exito");
+                const error_div = document.querySelector(".error");
+                const salir_button = document.querySelector(".server_response .salir_button");
+
+                exito_div.style.display = "none";
+                error_div.style.display = "none";
+                salir_button.style.display = "none";
+            }
+
+
+    </script>
+
+</body>
+</html>
