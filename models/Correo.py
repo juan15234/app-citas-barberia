@@ -1,7 +1,7 @@
 import yagmail
 import os
 from datetime import datetime, timedelta
-from zoneinfo import ZoneInf
+from zoneinfo import ZoneInfo
 
 from conexion import obtener_conexion
 
