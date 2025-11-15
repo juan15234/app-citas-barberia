@@ -13,7 +13,7 @@ class CitaModel:
         
         try:
             conexion = obtener_conexion()
-            cursor = conexion.cursor(row_factory=dict_row)
+            cursor = conexion.cursor()
             
             fecha_inicio = datetime.strptime(fecha, "%Y-%m-%d")
             fecha_fin = fecha_inicio.replace(hour=23, minute=59, second=59)
@@ -128,7 +128,7 @@ class CitaModel:
         
             if fecha_hora.replace(tzinfo=ZoneInfo("America/Bogota")) >= datetime.now(ZoneInfo("America/Bogota")):
                 conexion = obtener_conexion()
-                cursor = conexion.cursor(row_factory=dict_row)
+                cursor = conexion.cursor()
                 sql="""INSERT INTO citas(usuario, barbero, fecha_hora, correo_cliente, telefono_cliente, servicio_numero, duracion, token, nota_cliente) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
                 values = (usuario, barbero, fecha_hora, correo_cliente, str(telefono_cliente), servicio_numero, duracion, token, nota_cliente)
                 cursor.execute(sql, values)
@@ -148,7 +148,7 @@ class CitaModel:
         try:
             
             conexion = obtener_conexion()
-            cursor = conexion.cursor(row_factory=dict_row)
+            cursor = conexion.cursor()
             cursor.execute("""SELECT * FROM citas WHERE token=%s""",(token,))
             resultado = cursor.fetchone()
             
@@ -178,7 +178,7 @@ class CitaModel:
         try:
             
             conexion = obtener_conexion()
-            cursor = conexion.cursor(row_factory=dict_row)
+            cursor = conexion.cursor()
             cursor.execute("""DELETE FROM citas WHERE fecha_hora::date < CURRENT_DATE""")
             conexion.commit()
             
@@ -193,7 +193,7 @@ class CitaModel:
         try:
             
             conexion = obtener_conexion()
-            cursor = conexion.cursor(row_factory=dict_row)
+            cursor = conexion.cursor()
             cursor.execute("""SELECT * FROM citas WHERE token=%s""",(token,))
             resultado = cursor.fetchone()
             
