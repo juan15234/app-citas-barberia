@@ -1,8 +1,8 @@
-import psycopg2
+import psycopg
 import os
 
 def obtener_conexion():
-    conexion = psycopg2.connect(
+    conexion = psycopg.connect(
         user = os.getenv('USER_DB'),
         password = os.getenv('PASSWORD'),
         host = os.getenv('HOST'),
