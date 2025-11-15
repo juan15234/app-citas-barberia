@@ -10,3 +10,4 @@ flask==3.0.3
 PyMySQL==1.1.1
 yagmail==0.15.293
 APScheduler==3.11.0
+backports.zoneinfo
