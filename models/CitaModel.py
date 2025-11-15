@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from backports.zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo
 
 from conexion import obtener_conexion
 
