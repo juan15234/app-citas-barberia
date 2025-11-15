@@ -5,6 +5,8 @@ import uuid
 import os
 import json
 import base64
+import psycopg
+from psycopg.rows import dict_row
 
 from models.CitaModel import CitaModel
 from conexion import obtener_conexion
@@ -111,7 +113,7 @@ class GoogleCalendar:
                 values = (barbero, fecha_hora)
 
                 conexion = obtener_conexion()
-                cursor = conexion.cursor()
+                cursor = conexion.cursor(row_factory=dict_row)
 
                 cursor.execute(sql, values)
 
@@ -126,7 +128,7 @@ class GoogleCalendar:
                     sql="""INSERT INTO citas(usuario, barbero, fecha_hora, correo_cliente, telefono_cliente, servicio_numero, duracion, token, nota_cliente) VALUES (%s,%s,%s,%s,%s,%s,%s, %s, %s)"""
                     values = (usuario, barbero, fecha_hora, email, str(telefono), servicio, duracion,  token, nota_cliente)
                     conexion = obtener_conexion()
-                    cursor = conexion.cursor()
+                    cursor = conexion.cursor(row_factory=dict_row)
                     cursor.execute(sql, values)
                     conexion.commit()
 
@@ -163,7 +165,7 @@ class GoogleCalendar:
         values = (token)
         
         conexion = obtener_conexion()
-        cursor = conexion.cursor()
+        cursor = conexion.cursor(row_factory=dict_row)
         cursor.execute(sql, values)
         
         resultado = cursor.fetchone()
@@ -243,7 +245,7 @@ class GoogleCalendar:
         values = (token)
         
         conexion = obtener_conexion()
-        cursor = conexion.cursor()
+        cursor = conexion.cursor(row_factory=dict_row)
         cursor.execute(sql, values)
         
         usuario = cursor.fetchone()
