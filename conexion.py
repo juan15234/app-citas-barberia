@@ -1,5 +1,5 @@
 import psycopg
-import o
+import os
 
 def obtener_conexion():
     conexion = psycopg.connect(
