@@ -170,5 +170,6 @@ scheduler.add_job(Correo.enviar_recordatorio, trigger='cron', hour=9, misfire_gr
 scheduler.add_job(CitaModel.eliminar_citas_viejas, trigger='cron', hour=9, misfire_grace_time=3600)
 scheduler.start()
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
