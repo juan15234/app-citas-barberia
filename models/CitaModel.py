@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+import psycopg
+from psycopg.rows import dict_row
 
 from conexion import obtener_conexion
 
@@ -11,7 +13,7 @@ class CitaModel:
         
         try:
             conexion = obtener_conexion()
-            cursor = conexion.cursor()
+            cursor = conexion.cursor(row_factory=dict_row)
             
             fecha_inicio = datetime.strptime(fecha, "%Y-%m-%d")
             fecha_fin = fecha_inicio.replace(hour=23, minute=59, second=59)
