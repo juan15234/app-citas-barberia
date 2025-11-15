@@ -177,7 +177,7 @@ class CitaModel:
             
             conexion = obtener_conexion()
             cursor = conexion.cursor()
-            cursor.execute('''DELETE FROM citas WHERE fecha < CURDATE()''')
+            cursor.execute("""DELETE FROM citas WHERE fecha_hora::date < CURRENT_DATE""")
             conexion.commit()
             
             print('citas viejas eliminadas')
