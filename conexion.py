@@ -8,6 +8,6 @@ def obtener_conexion():
         password = os.getenv('PASSWORD'),
         host = os.getenv('HOST'),
         database = os.getenv('DATABASE'),
-        port = int(os.getenv('PORT')),
+        port = int(os.getenv('PORT_DB')),
     )
     return conexion
