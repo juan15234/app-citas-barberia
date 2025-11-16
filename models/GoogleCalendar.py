@@ -51,8 +51,8 @@ class GoogleCalendar:
             
 
             evento = {
-                'summary':f'nombre: {nombre}',
-                'description': f'servicio: {servicio} | barbero: {barbero} | correoCliente: {correo_cliente} | telefonoCliente:  {telefono_cliente} | NotaCliente: {nota_cliente}',
+                'summary':f'Nombre: {nombre} Servicio: {servicio}',
+                'description': f' | Barbero: {barbero} | CorreoCliente: {correo_cliente} | TelefonoCliente:  {telefono_cliente} | NotaCliente: {nota_cliente}',
                 'start': {
                     'dateTime': fecha_ini.isoformat(),
                     'timeZone': 'America/Bogota',
@@ -97,15 +97,15 @@ class GoogleCalendar:
 
                 fecha_hora = datetime.fromisoformat(event['start']['dateTime'])
 
-                usuario = extraer_campo('nombre', event_summary)
+                usuario = extraer_campo('Nombre', event_summary)
 
-                email = extraer_campo('correoCliente', event_description)
-                telefono = extraer_campo('telefonoCliente', event_description)
-                nota_cliente = extraer_campo('notaCliente', event_description)
+                email = extraer_campo('CorreoCliente', event_description)
+                telefono = extraer_campo('TelefonoCliente', event_description)
+                nota_cliente = extraer_campo('NotaCliente', event_description)
 
-                servicio, duracion = CitaModel.servicio_numero(extraer_campo('servicio', event_description))
+                servicio, duracion = CitaModel.servicio_numero(extraer_campo('Servicio', event_summary))
 
-                barbero = CitaModel.barbero_numero(extraer_campo('barbero', event_description))
+                barbero = CitaModel.barbero_numero(extraer_campo('Barbero', event_description))
 
                 sql="""SELECT usuario FROM citas WHERE barbero=%s AND fecha_hora=%s"""
                 values = (barbero, fecha_hora)
@@ -184,7 +184,7 @@ class GoogleCalendar:
                 
                 event_id = event['id']
                 
-                servicio = extraer_campo('servicio', event_description)
+                servicio = extraer_campo('servicio', event_summary)
                 correo_cliente = extraer_campo('Correo_cliente', event_description)
                 telefono_cliente = extraer_campo('Telefono_cliente', event_description)
                 
@@ -201,8 +201,8 @@ class GoogleCalendar:
                 colorId = event['colorId']
                 
                 evento_editado = {
-                        'summary':f'Nombre: {usuario}',
-                        'description': f'Servicio: {servicio} | Barbero: {nuevo_barbero} | Correo_cliente: {correo_cliente} | Telefonor_cliente:  {telefono_cliente}',
+                        'summary':f'Nombre: {usuario} Servicio: {servicio}',
+                        'description': f'Barbero: {nuevo_barbero} | Correo_cliente: {correo_cliente} | Telefonor_cliente:  {telefono_cliente}',
                         'start': {
                             'dateTime': nueva_fecha_ini.isoformat(),
                             'timeZone': 'America/Bogota',
