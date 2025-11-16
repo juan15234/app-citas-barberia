@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Barber Factory</title>
+    <link rel="stylesheet" href="../static/style/style_agendar.css">
+</head>
+<header>
+    <div class="container-salir">
+        <h2>The Barber Factory</h2>
+        <button onclick="cerrar_agendar()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </button>
+    </div> 
+</header>
+<body>
+    
+    <form id="fecha-barbero-form">
+
+        <button onclick="izquierda()" type="button" class="boton-svg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
+            </svg>
+        </button>
+
+        <div class="container" id="container-barberos-fecha">
+            <div class="card">
+                <h2>Seleccione una Fecha</h2>
+                <div class="fecha">
+                    <input type="date" name="fecha" id="fecha" placeholder="fecha📅" >
+                </div>
+            </div>
+    
+            <div class="card" id="barberos">
+                <h2>Seleccione El Barbero</h2>
+                <div class="profesionales">
+                    <button class="profesional" value="william"  type="button">
+                        <img src="../static/imagenes/perfil_william.jpg" id="perfil_william" alt="perfil william">
+                        <label for="perfil_william">William</label>
+                    </button>
+                    <button class="profesional" value="ruben" type="button">
+                        <img src="../static/imagenes/perfil_ruben.jpg" alt="perfil william">
+                        <label for="perfil_william">Ruben</label>
+                    </button>
+                    <button class="profesional" value="bryan" type="button">
+                        <img src="../static/imagenes/perfil_bryan.jpg" alt="perfil william">
+                        <label for="perfil_william">Bryan</label>
+                    </button>
+                    <button class="profesional" value="marcos" type="button">
+                        <img src="../static/imagenes/perfil_marcos.jpg" alt="perfil william">
+                        <label for="perfil_william">Marcos</label>
+                    </button>
+                    <button class="profesional" value="jhon" type="button">
+                        <img src="../static/imagenes/perfil_jhon.jpg" alt="perfil jhon">
+                        <label for="perfil_jhon">Jhon</label>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    
+    <form id="hora-datos-form">
+
+        <div class="container" id="container-hora-datos">
+            <div class="card">
+                <h2>Selecciona la Hora del Servicio</h2>
+
+                <div id="horas-container">
+
+                    <div id="horas-mañana-container" class="horas-disponibles-container">
+                        
+                        <label>Mañana</label>
+                        <div id="horas_mañana" class="horas-disponibles-horarios-container">
+                            Seleccione Fecha y Barbero
+                        </div>
+
+                    </div>
+
+                    <div id="horas-tarde-container" class="horas-disponibles-container">
+                        
+                        <label>Tarde</label>
+                        <div id="horas_tarde" class="horas-disponibles-horarios-container">
+                            Seleccione Fecha y Barbero
+                        </div>
+
+                    </div>
+
+                    <div id="horas-noche-container" class="horas-disponibles-container">
+                        
+                        <label>noche</label>
+                        <div id="horas_noche" class="horas-disponibles-horarios-container">
+                            Seleccione Fecha y Barbero
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card" id="datos">
+                <h2>Datos Personales</h2>
+                <div class="datos">
+                    
+                    <div class="container-dato">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" required>
+                    </div>
+    
+                    <div class="container-dato">
+                        <label for="telefono">Número de Telefono:</label>
+                        <input type="num" name="telefono" id="telefono" required>
+                    </div>
+    
+                    <div class="container-dato">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+    
+                    <div class="container-dato">
+                        <label for="nota">Observaciones(opcional):</label>
+                        <input type="text" name="nota" id="nota">
+                    </div>
+
+                    <button type="button" onclick="crear_cita()">
+                        <span>Agendar</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <button onclick="derecha()" type="button" class="boton-svg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+            </svg>
+        </button>
+    </form>
+
+    <div class="server_response">
+
+        <button onclick="cerrar_alerta_server_response()" class="salir_button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16" id="salir_icon" >
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </button>
+
+        <div class="exito">
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="white" class="bi bi-check2" viewBox="0 0 16 16" id="exito_icon">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+            </svg>
+            <span>¡Cita creada con exito!</span>
+        </div>
+
+        <div class="error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16" id="error_icon" >
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+            <span id="span_error">¡Hubo un error, revise los datos!</span>
+        </div>
+        
+    </div>
+    <div id="hora_no_disponible">
+        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-emoji-frown-fill" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m-2.715 5.933a.5.5 0 0 1-.183-.683A4.5 4.5 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.5 3.5 0 0 0 8 10.5a3.5 3.5 0 0 0-3.032 1.75.5.5 0 0 1-.683.183M10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8"/>
+        </svg>
+        <span id="no_disponible_span">¡Lo sentimos!, No tenemos disponible esta hora, le ofrecemos estas opciones:</span>
+        <div id="horas_recomendadas">
+
+        </div>
+    </div>
+
+    <!-- Incluye Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr("input[type='date']", {
+            dateFormat: "Y-m-d"
+        });
+
+        const form_barbero_fecha = document.getElementById("fecha-barbero-form");
+        const form_hora_datos = document.getElementById("hora-datos-form");
+
+        function izquierda(){
+
+            form_hora_datos.style.display = "flex";
+
+                if(screen.width >= 601){
+                    setTimeout(() => {
+                    form_barbero_fecha.style.transform = "translateX(-150%)";
+                    form_hora_datos.style.transform = "translateX(-95%)";
+                    }, 200);
+                }
+                else{
+                    setTimeout(() => {
+                    form_barbero_fecha.style.transform = "translateX(-150%)";
+                    form_hora_datos.style.transform = "translateX(0%)";
+                    }, 200);
+                }
+
+        }
+
+        function derecha(){
+
+            form_barbero_fecha.style.transform = "translateX(0%)";
+            form_hora_datos.style.transform = "translateX(150%)";
+
+            setTimeout(() => {
+                    form_hora_datos.style.display = "none";
+                }, 300);
+        }
+
+        let ultimo_barbero_presionado = null
+
+        //estilo borde boton barbero seleccionado
+        document.querySelectorAll(".profesional").forEach(boton => {
+            boton.addEventListener("click",function(){
+                document.querySelectorAll(".profesional").forEach(btn => {
+                    btn.classList.remove("seleccionado");
+                });
+
+                this.classList.add("seleccionado");
+
+                ultimo_barbero_presionado = this;
+
+                horas_disponibles(this);
+            });
+        });
+
+        //horas disponibles
+        const fechaInput = document.getElementById("fecha");
+        const hora_container = document.getElementById("horas-container");
+
+        const hora_container_mañana = document.getElementById("horas_mañana");
+        const hora_container_tarde = document.getElementById("horas_tarde");
+        const hora_container_noche = document.getElementById("horas_noche");
+
+        let fecha = fechaInput.value;
+        let barbero = null;
+
+        //horaria de la mañana
+        let bloques_ocupados = null;
+    
+            async function horas_disponibles(boton){
+
+                fecha = fechaInput.value;
+
+                barbero = boton.value;
+
+                if(fecha && barbero){
+                    try{
+                        //horaria de la mañana
+                        const response = await fetch(`/horas-disponibles?fecha=${fecha}&barbero=${barbero}`);
+
+                        respuesta_horas = await response.json();
+
+                        bloques_ocupados = respuesta_horas[1]
+
+                        const horas_mañana = respuesta_horas[0][0]
+
+                        hora_container_mañana.innerHTML = '';
+                        hora_container_tarde.innerHTML = '';
+                        hora_container_noche.innerHTML = '';
+
+                        if(horas_mañana.length > 0){
+                            horas_mañana.forEach(hora => {
+                                const hora_div_mañana = document.createElement('button');
+                                hora_div_mañana.classList.add('horas');
+                                hora_div_mañana.textContent = hora;
+                                hora_div_mañana.value = hora;
+                                hora_div_mañana.type = 'button';
+                                hora_div_mañana.id = `hora-${hora.replace(":", "")}`;
+                                hora_div_mañana.onclick = function(){
+                                    guardar_hora(this.id);
+                                };
+
+                                hora_container_mañana.appendChild(hora_div_mañana);
+
+                            });
+                        }
+                        else{
+                            hora_container_mañana.innerHTML = 'No Horas Disponibles'
+                        }
+
+                        horas_tarde = respuesta_horas[0][1]
+
+                        if(horas_tarde.length > 0){
+                            horas_tarde.forEach(hora => {
+                            const hora_div_tarde = document.createElement('button');
+                            hora_div_tarde.classList.add('horas');
+                            hora_div_tarde.textContent = hora;
+                            hora_div_tarde.value = hora;
+                            hora_div_tarde.type = 'button';
+                            hora_div_tarde.id = `hora-${hora.replace(":", "")}`;
+                            hora_div_tarde.onclick = function(){
+                                guardar_hora(this.id);
+                            };
+
+                                hora_container_tarde.appendChild(hora_div_tarde);
+
+                            });
+                        }
+                        else{
+                            hora_container_tarde.innerHTML = 'No Horas Disponibles'
+                        }
+
+                        horas_noche = respuesta_horas[0][2]
+
+                        if(horas_noche.length > 0){
+                            horas_noche.forEach(hora => {
+                            const hora_div_noche = document.createElement('button');
+                            hora_div_noche.classList.add('horas');
+                            hora_div_noche.textContent = hora;
+                            hora_div_noche.value = hora;
+                            hora_div_noche.type = 'button';
+                            hora_div_noche.id = `hora-${hora.replace(":", "")}`;
+                            hora_div_noche.onclick = function(){
+                                guardar_hora(this.id);
+                            };
+
+                            hora_container_noche.appendChild(hora_div_noche);
+
+                        });
+                        }
+                        else{
+                            hora_container_noche.innerHTML = 'No Horas Disponibles'
+                        }
+
+                    }catch (error){
+                        console.log(error);
+                    }
+                }
+
+            }
+
+
+            fechaInput.addEventListener("change",() => {
+                if (ultimo_barbero_presionado){
+                    horas_disponibles(ultimo_barbero_presionado);
+                }
+            });
+
+            //guardar la hora de manera global para poder ser utilizada en crear_cita()
+            //tambien si el usuario seleciona una hora que este en un rango de 45 minutos despues de que una cita se acabe,  
+            //se le preguntara si quiere correr la cita a un minuto despues de que la cita anterior se acabe o si quiere correr la cita 45min 
+            //despues de la cita anterior
+
+            let hora = null;
+
+            const horas_no_disponibles_container = document.getElementById("hora_no_disponible")
+            const horas_recomendadas_container = document.getElementById("horas_recomendadas")
+
+            function guardar_hora(id){
+            
+                document.querySelectorAll(".horas").forEach(btn =>{
+                    btn.style.border = "none";
+                    btn.style.transform = "translateY(0%)"
+                });
+            
+                hora_element = document.getElementById(id);
+                hora_element.style.border = "1px solid black";
+                hora_element.style.transform = "translateY(-5%)"
+            
+                hora = document.getElementById(id).value;
+
+                if(bloques_ocupados != []){
+
+                    for(let i=0; i<=bloques_ocupados.length-1; i++){
+
+
+                        ultima_hora_ocupada = bloques_ocupados[i][bloques_ocupados[i].length - 1]
+
+                        ultima_hora_ocupada_int = parseInt(ultima_hora_ocupada.replace(':',''));
+
+                        const [horas, minutos] = ultima_hora_ocupada.split(":").map(Number);
+
+                        const fecha = new Date();
+                        fecha.setHours(horas);
+                        fecha.setMinutes(minutos);
+
+                        fecha.setMinutes(fecha.getMinutes() + 45);
+
+                        const horaFinal = fecha.getHours().toString().padStart(2, "0");
+                        const minutoFinal = fecha.getMinutes().toString().padStart(2, "0");
+
+                        ultima_hora_ocupada_sumada = `${horaFinal}${minutoFinal}`;
+
+                        ultima_hora_ocupada_sumada_int = parseInt(ultima_hora_ocupada_sumada)
+
+                        hora_int = parseInt(hora.replace(':',''))
+
+                        hora_int_string_sumada = String(hora_int + 45)
+
+                        hora_int_sumada_replace = parseInt(hora_int_string_sumada[0] + hora_int_string_sumada[1])
+
+                        minuto_izquierda_int_sumada = hora_int_string_sumada[2]
+                        minuto_derecha_int_sumada = hora_int_string_sumada[3]
+
+                        tiempo_duracion = true
+                        
+
+                        if(minuto_izquierda_int_sumada > 5){
+                        
+                            minuto_izquierda_int_sumada = 0
+                            hora_int_sumada_replace += 1
+                        
+                        }
+                        
+                        if(minuto_izquierda_int_sumada == 0 && minuto_derecha_int_sumada == 5){
+
+                            minuto_izquierda_int_sumada = 1
+
+                        }else if(minuto_izquierda_int_sumada == 3 && minuto_derecha_int_sumada == 0){
+
+                            minuto_izquierda_int_sumada = 3
+                            minuto_derecha_int_sumada = 0
+
+                        }
+
+                        hora_int_sumada_string = String(hora_int_sumada_replace) + ":" + String(minuto_izquierda_int_sumada) + String(minuto_derecha_int_sumada);
+
+                        hora_int_sumada = parseInt(hora_int_sumada_string.replace(':',''))
+
+                        if(!document.getElementById('hora-'+hora_int_sumada_string.replace(":",""))){
+
+                            tiempo_duracion = false
+
+                        }
+
+                        if(!tiempo_duracion){
+
+                            hora_disponible_tiempo_duracion = hora_int_sumada
+
+                            hora_disponible_tiempo_duracion_string = String(hora_disponible_tiempo_duracion)
+
+                            while(tiempo_duracion==false){
+
+                                if(!document.getElementById('hora-'+hora_disponible_tiempo_duracion)){
+                                    
+
+                                    if(hora_disponible_tiempo_duracion_string[2] == 6  && hora_disponible_tiempo_duracion_string[3] == 0){
+
+                                    hora_disponible_tiempo_duracion_string_hora = parseInt(hora_disponible_tiempo_duracion_string[1]) + 1
+
+                                        hora_disponible_tiempo_duracion_string = hora_disponible_tiempo_duracion_string[0] + String(hora_disponible_tiempo_duracion_string_hora) + "00";
+
+
+                                        hora_disponible_tiempo_duracion = parseInt(hora_disponible_tiempo_duracion_string)
+
+                                    }
+
+                                    tiempo_duracion = false
+                                    hora_disponible_tiempo_duracion += 15
+                                    hora_disponible_tiempo_duracion_string = String(hora_disponible_tiempo_duracion)
+
+                                }else{
+
+                                    tiempo_duracion = true
+
+                                    hora_disponible_tiempo_duracion_boton = document.createElement("button")
+                                    hora_disponible_tiempo_duracion_boton.textContent = hora_disponible_tiempo_duracion_string = hora_disponible_tiempo_duracion_string[0] + hora_disponible_tiempo_duracion_string[1] + ":" + hora_disponible_tiempo_duracion_string[2] + hora_disponible_tiempo_duracion_string[3];
+                                    hora_disponible_tiempo_duracion_boton.value = hora_disponible_tiempo_duracion_string
+                                    hora_disponible_tiempo_duracion_boton.id = hora_disponible_tiempo_duracion_string.replace(':','');
+                                    hora_disponible_tiempo_duracion_boton.onclick = function(){
+                                        guardar_hora_sugerida(this.id);
+                                    
+                                        horas_no_disponibles_container.style.display = "none";
+                                        horas_recomendadas_container.style.display = "none";
+                                    };
+                                
+                                    hora_disponible_tiempo_duracion_boton.classList.add("hora_recomendada")
+                                
+                                    horas_recomendadas_container.innerHTML = "";
+                                
+                                    horas_recomendadas_container.appendChild(hora_disponible_tiempo_duracion_boton)
+
+                                    horas_no_disponibles_container.style.display = "flex";
+                                    horas_recomendadas_container.style.display = "flex";
+
+                                }
+                            }
+                        }
+
+                        if (hora_int == ultima_hora_ocupada_int + 1){
+
+                            hora = hora_int
+
+                        }else if (hora_int > ultima_hora_ocupada_int && hora_int < ultima_hora_ocupada_sumada_int){
+
+                            //HORA SUMADA
+
+                            hora_sumada = parseInt(ultima_hora_ocupada_sumada[0] + ultima_hora_ocupada_sumada[1]);
+
+                            minuto_izquierda = parseInt(ultima_hora_ocupada_sumada[2]);
+                            minuto_derecha = parseInt(ultima_hora_ocupada_sumada[3]);
+                            
+
+                            if(minuto_izquierda == 5 && minuto_derecha == 9){
+                                minuto_derecha = 0
+                                minuto_izquierda = 0
+                                hora_sumada += 1
+                            }else if(minuto_izquierda <= 5 && minuto_derecha < 9){
+                                minuto_derecha += 1
+                            }else if(minuto_izquierda < 5 && minuto_derecha == 9){
+                                minuto_izquierda += 1
+                                minuto_derecha = 0
+                            }
+
+                            ultima_hora_ocupada_sumada = String(hora_sumada) + ":" + String(minuto_izquierda) + String(minuto_derecha);
+
+                            //HORA SEGUIDA
+
+                            hora_seguida = parseInt(ultima_hora_ocupada[0] + ultima_hora_ocupada[1]);
+
+                            minuto_izquierda_seguida = parseInt(ultima_hora_ocupada[3]);
+                            minuto_derecha_seguida = parseInt(ultima_hora_ocupada[4]);
+
+                            if(minuto_izquierda_seguida == 5 && minuto_derecha_seguida == 9){
+                                minuto_derecha_seguida = 0
+                                minuto_izquierda_seguida = 0
+                                hora_seguida += 1
+                            }else if(minuto_izquierda_seguida <= 5 && minuto_derecha_seguida < 9){
+                                minuto_derecha_seguida += 1
+                            }else if(minuto_izquierda_seguida < 5 && minuto_derecha_seguida == 9){
+                                minuto_izquierda_seguida += 1
+                                minuto_derecha_seguida = 0
+                            }
+
+                            ultima_hora_ocupada = String(hora_seguida) + ":" + String(minuto_izquierda_seguida) + String(minuto_derecha_seguida);
+
+                            horas_no_disponibles_container.style.display = "flex";
+
+                            hora_seguida_boton = document.createElement("button")
+                            hora_seguida_boton.textContent = ultima_hora_ocupada
+                            hora_seguida_boton.value = ultima_hora_ocupada
+                            hora_seguida_boton.id = ultima_hora_ocupada.replace(":", "")
+                            hora_seguida_boton.onclick = function(){
+                                guardar_hora_sugerida(this.id);
+
+                                horas_no_disponibles_container.style.display = "none";
+                                horas_recomendadas_container.style.display = "none";
+                            };
+
+                            hora_seguida_boton.classList.add("hora_recomendada")
+
+                            hora_sumada_boton = document.createElement("button")
+                            hora_sumada_boton.textContent = ultima_hora_ocupada_sumada
+                            hora_sumada_boton.value = ultima_hora_ocupada_sumada
+                            hora_sumada_boton.id = ultima_hora_ocupada_sumada.replace(":", "")
+                            hora_sumada_boton.onclick = function(){
+                                guardar_hora_sugerida(this.id);
+
+                                horas_no_disponibles_container.style.display = "none";
+                                horas_recomendadas_container.style.display = "none";
+                            };
+
+                            hora_sumada_boton.classList.add("hora_recomendada")
+
+                            horas_recomendadas_container.innerHTML = "";
+
+                            horas_recomendadas_container.appendChild(hora_seguida_boton)
+                            horas_recomendadas_container.appendChild(hora_sumada_boton)
+
+                            horas_recomendadas_container.style.display = "flex";
+
+                        }
+                    }
+                }
+
+            }
+            
+            function guardar_hora_sugerida(id){
+
+                hora_sugerida_elegida = document.getElementById(id);
+
+                horas_no_disponibles_container.style.display = "none";
+                horas_recomendadas_container.style.display= "none";
+
+                document.querySelectorAll(".hora_recomendada").forEach(btn =>{
+                    btn.style.transform ="translateY(0%)"
+                })
+
+                hora_sugerida_elegida.style.transform = "translateY(-5%)"
+
+                document.querySelectorAll(".horas").forEach(btn =>{
+                    btn.style.border = "none"
+                    btn.style.transform = "translateY(0%)"
+                })
+
+                hora_element = document.getElementById('hora-' + hora_sugerida_elegida.id);
+                hora_element.style.border = "1px solid black";
+                hora_element.style.transform = "translateY(-5%)"
+
+                //guardar la hora
+
+                hora = hora_sugerida_elegida.value
+
+                hora_int = parseInt(hora.replace(':', ''))
+                
+
+                hora_string_sumada = String(hora_int + 45)
+
+                hora_int_sumada_replace = parseInt(hora_string_sumada[0] + hora_string_sumada[1])
+
+                minuto_izquierda_int_sumada = hora_int_sumada[2]
+                minuto_derecha_int_sumada = hora_int_sumada[3]
+
+                if(minuto_izquierda_int_sumada > 5){
+
+                    minuto_izquierda_int_sumada = 0
+                    hora_int_sumada_replace += 1
+
+                }
+
+                hora_int_sumada_string = String(hora_int_sumada_replace) + ":" + String(minuto_izquierda_int_sumada) + String(minuto_derecha_int_sumada);
+
+                hora_int_sumada = parseInt(hora_int_sumada_string.replace(':',''))
+
+                horas_no_disponibles_container.style.display = "none";
+                horas_recomendadas_container.style.display= "none";
+            }
+
+            const input_nombre = document.getElementById("nombre");
+            const input_telefono = document.getElementById("telefono");
+            const input_email = document.getElementById("email");
+            const input_nota = document.getElementById("nota");
+
+            async function crear_cita(){
+                try{
+
+                    const nombre = input_nombre.value;
+                    const correo_cliente = input_email.value;
+                    const telefono_cliente = input_telefono.value;
+                    const nota = input_nota.value;
+
+                    const exito_div = document.querySelector(".exito");
+                    const error_div = document.querySelector(".error");
+                    const salir_button = document.querySelector(".server_response .salir_button");
+                    const span_error = document.getElementById("span_error");
+
+                    if(nombre && correo_cliente && telefono_cliente && barbero && fecha && hora ){
+
+                        if(nota.length > 0){
+                            response = await fetch(`/crear_cita?nombre=${nombre}&barbero=${barbero}&fecha=${fecha}&hora=${hora}&correo_cliente=${correo_cliente}&telefono_cliente=${telefono_cliente}&nota=${nota}`);
+                        }else{
+                            response = await fetch(`/crear_cita?nombre=${nombre}&barbero=${barbero}&fecha=${fecha}&hora=${hora}&correo_cliente=${correo_cliente}&telefono_cliente=${telefono_cliente}`);
+                        }
+
+                        const cita = await response.json();
+
+                        if (cita.ok){
+            
+                            exito_div.style.display = "flex";
+            
+                            const response = await fetch(`/programar_cita_calendario_y_enviar_correo?token=${cita.token}`);
+
+                            console.log(response.json());
+
+                            window.location.replace("/home")
+
+                        }
+                        else{
+
+                            span_error.textContent = cita.estatus;
+                            error_div.style.display = "flex";
+                            salir_button.style.display = "block";
+
+                        }
+                    }else{
+                        salir_button.style.display = "block";
+                        error_div.style.display = "flex";
+                    }
+
+                }catch(error){
+                    console.log(error);
+                }
+            }
+
+            function cerrar_alerta_server_response(){
+
+                const exito_div = document.querySelector(".exito");
+                const error_div = document.querySelector(".error");
+                const salir_button = document.querySelector(".server_response .salir_button");
+
+                exito_div.style.display = "none";
+                error_div.style.display = "none";
+                salir_button.style.display = "none";
+            }
+
+            function cerrar_agendar(){
+                window.location.replace("/home")
+            }
+
+    </script>
+
+</body>
+</html> 
