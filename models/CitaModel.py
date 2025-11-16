@@ -139,7 +139,7 @@ class CitaModel:
             
         except Exception as e:
             print(e)
-            return e
+            return str(e)
             
     @classmethod
     def editar_cita(cls, nueva_fecha, nueva_hora, nuevo_barbero, token):
