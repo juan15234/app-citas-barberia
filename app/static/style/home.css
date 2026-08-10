@@ -1,13 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+
 html, body{
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h1{ font-size: 35px; }
+h1{
+     font-size: 100px; 
+     font-family: 'Rye', serif;
+}
 
 h4{
-     margin: 0; 
+    font-size: 20px;
+    margin: 0; 
     color: rgb(202, 117, 5);
 }
 
