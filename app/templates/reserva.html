@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Barber Factory</title>
+    <link rel="stylesheet" href="../static/style/reserva-style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.12.2/build/css/intlTelInput.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <h2>The Barber Factory</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        fill="currentColor"
+        class="bi bi-x-lg"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+        />
+      </svg>
+    </nav>
+
+    <section id="sect_reserva">
+      <div class="container_fecha_barbero container">
+        <div class="container_fecha">
+          <h3>Selecciona La Fecha Del Servicio</h3>
+          <input type="datetime" name="fecha" id="fecha">
+        </div>
+        <div class="container_barberos">
+          <h3>Selecciona Tu Barbero</h3>
+          <div class="barberos">
+            <div class="card_barbero">
+              <img src="../static/images/corte_image.jpg" alt="" />
+              <h3>William</h3>
+            </div>
+            <div class="card_barbero">
+              <img src="../static/images/corte_image.jpg" alt="" />
+              <h3>William</h3>
+            </div>
+            <div class="card_barbero">
+              <img src="../static/images/corte_image.jpg" alt="" />
+              <h3>William</h3>
+            </div>
+            <div class="card_barbero">
+              <img src="../static/images/corte_image.jpg" alt="" />
+              <h3>William</h3>
+            </div>
+            <div class="card_barbero">
+              <img src="../static/images/corte_image.jpg" alt="" />
+              <h3>William</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container_horas container">
+        <h3>Selecciona La Hora Del Servicio</h3>
+        <div class="container_manana">
+          
+        </div>
+        <div class="contianer_tarde">
+
+        </div>
+        <div class="container_noche">
+
+        </div>
+      </div>
+
+      <div class="container_datos container">
+        <h3>Ingresa Tus Datos</h3>
+        <form action="POST">
+          {{ form.hidden_tag() }}
+
+          <div class="group_inp">{{ form.correo }} {{ form.correo.label }}</div>
+          <div class="group_inp">{{ form.nombre }} {{ form.nombre.label }}</div>
+          <div class="group_inp">{{ form.numero }} {{ form.numero.label }}</div>
+
+          {{ form.boton_reservar }}
+        </form>
+      </div>
+
+    </section>
+  </body>
+</html>

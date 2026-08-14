@@ -1,0 +1,121 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 95%;
+    overflow: hidden;
+}
+
+h2{
+     font-weight: 400;
+     font-family: 'Rye', serif;
+     padding-left: 10px;
+}
+
+nav{
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 9vh;
+    box-shadow: 0px 10px 15px rgb(0,0,0,0.6);
+    border-radius: 0px 0 20px 20px;
+}
+
+svg{
+    position: relative;
+    height: 100%;
+    padding: 0 30px;
+    background-color: rgb(181, 179, 179);
+    border-bottom-right-radius: 20px;
+}
+
+#sect_reserva{
+    position: relative;
+    height: 90%;
+    width: 90%;
+    display: flex;
+    overflow: hidden;
+    padding: 10px;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+}
+
+#sect_reserva .container{
+    height: 98%;
+    width: 95%;
+    flex: 0 0 95%;
+    padding: 10px;
+    border-radius: 25px;
+    scroll-snap-align: center;
+    background-color: white;
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sect_reserva .barberos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#sect_reserva .card_barbero{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    padding: 10px;
+    background-color: rgb(224, 143, 36);
+    border-radius: 10px;
+}
+
+#sect_reserva .card_barbero img{
+    width: 80px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+form .group_inp{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+form .group_inp input{
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid black;
+    height: 30px;
+    text-align: center;
+}
+
+form .group_inp label{
+    display: inline-block;
+    width: fit-content;
+    position: relative;
+    bottom: -15px;
+    left: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+form .group_inp input:focus, form .group_inp input:not(:placeholder-shown){
+    border: 1px solid rgb(6, 146, 196);
+}
+
+form .group_inp input:focus + label, form .group_inp input:not(:placeholder-shown) + label {
+    bottom: -5px;
+    border: 1px solid rgb(6, 146, 196);
+    color: rgb(6, 146, 196);
+}

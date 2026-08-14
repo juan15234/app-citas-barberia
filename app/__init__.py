@@ -12,7 +12,9 @@ def create_app():
     csrf.init_app(app)
     
     from app.routes.main import main_bp
+    from app.routes.reservas import reservas_bp
     
     app.register_blueprint(main_bp)
+    app.register_blueprint(reservas_bp)
     
     return app
